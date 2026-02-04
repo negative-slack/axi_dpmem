@@ -5,6 +5,14 @@
 `define AXI_ADDR_WIDTH 32
 `endif
 
+`ifndef AXI_DATA_WIDTH 
+`define AXI_DATA_WIDTH 32
+`endif
+
+`ifndef AXI_STRB_WIDTH 
+`define AXI_STRB_WIDTHB `AXI_DATA_WIDTH / 8
+`endif
+
 `ifndef AXI_SIZE_WIDTH 
 `define AXI_SIZE_WIDTH 3
 `endif
@@ -17,12 +25,8 @@
 `define AXI_LEN_WIDTH 8
 `endif
 
-`ifndef AXI_DATA_WIDTH 
-`define AXI_DATA_WIDTH 32
-`endif
-
-`ifndef AXI_STRB_WIDTH 
-`define AXI_STRB_WIDTHB `AXI_DATA_WIDTH / 8
+`ifndef MEM_DEPTH 
+`define MEM_DEPTH (1 << `AXI_ADDR_WIDTH)
 `endif
 
 `endif

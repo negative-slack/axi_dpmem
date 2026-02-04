@@ -7,6 +7,8 @@ package axi_pkg;
 
   typedef logic [`AXI_ADDR_WIDTH-1:0] addr_t;
 
+  typedef logic [`AXI_DATA_WIDTH-1:0] data_t;
+
   // *SIZE : describes the maximum number of bytes to transfer in each data transfer 
   // e.g., 1, 2, 4, 8, 16, 32, 64 128
   typedef logic [`AXI_SIZE_WIDTH-1:0] size_t;
@@ -14,9 +16,9 @@ package axi_pkg;
   // *BURST : describes the burst type of the transaction: fixed, incrementing, or wrapping.
   typedef logic [`AXI_BURST_WIDTH-1:0] burst_t;
 
+  // describes the length of the transaction in the number of transfers.
+  // For AXI4, AxLEN[7:0] has 8 bits, which specifies a range of 1-256 data transfers in a transaction.
   typedef logic [`AXI_LEN_WIDTH-1:0] len_t;
-
-  typedef logic [`AXI_DATA_WIDTH-1:0] data_t;
 
   typedef logic [`AXI_STRB_WIDTH-1:0] strb_t;
 

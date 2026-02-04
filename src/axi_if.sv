@@ -4,69 +4,69 @@
 interface axi_if
   import axi_pkg::*;
 (
-    bit ACLK,
-    bit ARESETn
+    bit ACLK,    // Global Clock Signal
+    bit ARESETn  // Global Reset Signal
 );
 
   ////////////////////////////////////////////
-  // Write channel signals
+  // Write Channel Signals
   ////////////////////////////////////////////
 
-  // WRITE ADDRESS CHANNEL SIGNALS
-  bit AWVALID;
-  bit AWREADY;
-  addr_t AWADDR;
-  size_t AWSIZE;
-  burst_t AWBURST;
+  // WRITE ADDRESS (AW) CHANNEL SIGNALS
+  bit AW_VALID;
+  bit AW_READY;
+  addr_t AW_ADDR;
+  size_t AW_SIZE;
+  burst_t AW_BURST;
+  logic [7:0] AW_LEN;  // up to 256 transfers in the one transaction
   // logic [3:0] AWCACHE;
   // logic [2:0] AWPROT;
   // logic [$:0] AWID;
-  logic [7:0] AWLEN;  // up to 256 transfers in the one transaction
   // logic AWLOCK;
   // logic [3:0] AWQOS;
   // logic [3:0] AWREGION;
   // logic [$:0] AWUSER;
 
-  // WRITE DATA CHANNEL SIGNALS
-  bit WVALID;
-  bit WREADY;
-  bit WLAST;
-  data_t WDATA;
-  strb_t WSTRB;
+  // WRITE DATA (W) CHANNEL SIGNALS
+  bit W_VALID;
+  bit W_READY;
+  data_t W_DATA;
+  strb_t W_STRB;
+  bit W_LAST;
   // logic [$:0] WUSER;
 
-  // WRITE RESPONSE CHANNEL SIGNALS
-  bit BVALID;
-  bit BREADY;
-  bit [1:0] BRESP;
+  // WRITE RESPONSE (B) CHANNEL SIGNALS
+  bit B_VALID;
+  bit B_READY;
+  bit [1:0] B_RESP;
   // logic [$:0] BID;
   // logic [$:0] BUSER;
 
   ////////////////////////////////////////////
-  // Read channel signals
+  // Read Channel Signals
   ////////////////////////////////////////////
 
   // READ ADDRESS CHANNEL SIGNALS
-  bit ARVALID;
-  bit AREADY;
-  addr_t ARADDR;
-  size_t ARSIZE;
-  burst_t ARBURST;
+  bit AR_VALID;
+  bit AR_READY;
+  addr_t AR_ADDR;
+  size_t AR_SIZE;
+  burst_t AR_BURST;
+  logic [7:0] AR_LEN;  // up to 256 transfers in the one transaction
   // logic [3:0] ARCACHE;
   // logic [2:0] ARPROT;
   // logic [$:0] ARID;
-  logic [7:0] ARLEN;  // up to 256 transfers in the one transaction
   // logic AWLOCK;
   // logic [3:0] ARQOS;
   // logic [3:0] ARREGION;
   // logic [$:0] ARUSER;
 
   // READ DATA CHANNEL SIGNALS
-  bit RVALID;
-  bit READY;
-  bit RLAST;
-  data_t RDATA;
-  strb_t RRESP;
+  bit R_VALID;
+  bit R_READY;
+  bit R_LAST;
+  data_t R_DATA;
+  strb_t R_RESP;
   // logic [$:0] RID;
   // logic [$:0] RUSER;
 
@@ -75,58 +75,28 @@ interface axi_if
 
       ACLK, ARESETn,  // system
 
-      AWVALID, AWADDR, AWSIZE, AWBURST, AWLEN,  // WRITE ADDRESS CHANNEL SIGNALS
+      AW_VALID, AW_ADDR, AW_SIZE, AW_BURST, AW_LEN,  // WRITE ADDRESS CHANNEL SIGNALS
 
-      WVALID, WLAST, WDATA, WSTRB,  // WRITE DATA CHANNEL SIGNALS
+      W_VALID, W_DATA, W_STRB, W_LAST,  // WRITE DATA CHANNEL SIGNALS
 
-      BVALID,  // WRITE RESPONSE CHANNEL SIGNALS
+      B_READY,  // WRITE RESPONSE CHANNEL SIGNALS
 
-      ARVALID, ARADDR, ARSIZE, ARBURST, ARLEN,  // READ ADDRESS CHANNEL SIGNALS
+      AR_VALID, AR_ADDR, AR_SIZE, AR_BURST, A_RLEN,  // READ ADDRESS CHANNEL SIGNALS
 
-      READY,  // READ DATA CHANNEL SIGNALS
+      R_READY,  // READ DATA CHANNEL SIGNALS
 
 
       output  // each channel will be in a sepearte line for better visualization
 
-      AWREADY,  // WRITE ADDRESS CHANNEL SIGNALS
+      AW_READY,  // WRITE ADDRESS CHANNEL SIGNALS
 
-      WREADY,  // WRITE DATA CHANNEL SIGNALS
+      W_READY,  // WRITE DATA CHANNEL SIGNALS
 
-      BREADY, BRESP,  // WRITE RESPONSE CHANNEL SIGNALS
+      B_VALID, B_RESP,  // WRITE RESPONSE CHANNEL SIGNALS
 
-      AREADY,  // READ ADDRESS CHANNEL SIGNALS
+      AR_READY,  // READ ADDRESS CHANNEL SIGNALS
 
-      RVALID, RLAST, RDATA, RESP  // READ DATA CHANNEL SIGNALS
-
-  );
-
-  modport mst_mp(
-      output  // each channel will be in a sepearte line for better visualization
-
-      AWVALID, AWADDR, AWSIZE, AWBURST, AWLEN,  // WRITE ADDRESS CHANNEL SIGNALS
-
-      WVALID, WLAST, WDATA, WSTRB,  // WRITE DATA CHANNEL SIGNALS
-
-      BVALID,  // WRITE RESPONSE CHANNEL SIGNALS
-
-      ARVALID, ARADDR, ARSIZE, ARBURST, ARLEN,  // READ ADDRESS CHANNEL SIGNALS
-
-      READY,  // READ DATA CHANNEL SIGNALS
-
-
-      input  // each channel will be in a sepearte line for better visualization
-
-      ACLK, ARESETn,  //system
-
-      AWREADY,  // WRITE ADDRESS CHANNEL SIGNALS
-
-      WREADY,  // WRITE DATA CHANNEL SIGNALS
-
-      BREADY, BRESP,  // WRITE RESPONSE CHANNEL SIGNALS
-
-      AREADY,  // READ ADDRESS CHANNEL SIGNALS
-
-      RVALID, RLAST, RDATA, RESP  // READ DATA CHANNEL SIGNALS
+      R_VALID, R_DATA, R_RESP, R_LAST  // READ DATA CHANNEL SIGNALS
 
   );
 
