@@ -103,6 +103,7 @@ module axil_dpmem
     end
   end
 
+  // R channel
   always_comb begin
     if (!axi_slv.ARESETn) begin
       axi_slv.R_VALID = 0;
