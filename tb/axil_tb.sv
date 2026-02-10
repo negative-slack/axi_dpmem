@@ -66,15 +66,18 @@ module axil_tb;
 
   initial begin
     tb_AW_VALID = 0;
+
     tb_W_VALID  = 0;
+
     tb_B_READY  = 0;
 
     tb_AR_VALID = 0;
+    
     tb_R_READY  = 0;
 
     // dummy directed test case # 1
     @(posedge clk);
-    @(posedge clk);
+
     tb_AW_VALID = 1;
     tb_AW_ADDR  = 32'h8;
 
@@ -82,12 +85,12 @@ module axil_tb;
     tb_W_DATA   = 32'hdeadbeef;
     tb_W_STRB   = 4'hc;
 
+    tb_B_READY  = 1;
+
     tb_AR_VALID = 1;
     tb_AR_ADDR  = 32'h9;
 
-    tb_W_VALID  = 1;
-
-    tb_R_READY  = 0;
+    tb_R_READY  = 1;
 
     @(posedge clk);
 
@@ -105,38 +108,38 @@ module axil_tb;
     tb_B_READY = 0;
     tb_R_READY = 0;
 
-    // dummy directed test case # 2
-    @(posedge clk);
+    // // dummy directed test case # 2
+    // @(posedge clk);
 
-    tb_AW_VALID = 1;
-    tb_AW_ADDR  = 32'h8;
+    // tb_AW_VALID = 1;
+    // tb_AW_ADDR  = 32'h8;
 
-    tb_W_VALID  = 1;
-    tb_W_DATA   = 32'hfedcba98;
-    tb_W_STRB   = 4'hc;
+    // tb_W_VALID  = 1;
+    // tb_W_DATA   = 32'hfedcba98;
+    // tb_W_STRB   = 4'hc;
 
-    tb_AR_VALID = 1;
-    tb_AR_ADDR  = 32'h9;
+    // tb_AR_VALID = 1;
+    // tb_AR_ADDR  = 32'h9;
 
-    tb_W_VALID  = 1;
+    // tb_W_VALID  = 1;
 
-    tb_R_READY  = 0;
+    // tb_R_READY  = 0;
 
-    @(posedge clk);
+    // @(posedge clk);
 
-    tb_AW_VALID = 0;
+    // tb_AW_VALID = 0;
 
-    tb_W_VALID  = 0;
+    // tb_W_VALID  = 0;
 
-    tb_B_READY  = 1;
+    // tb_B_READY  = 1;
 
-    tb_AR_VALID = 0;
+    // tb_AR_VALID = 0;
 
-    tb_R_READY  = 1;
+    // tb_R_READY  = 1;
 
-    @(posedge clk);
-    tb_B_READY = 0;
-    tb_R_READY = 0;
+    // @(posedge clk);
+    // tb_B_READY = 0;
+    // tb_R_READY = 0;
 
   end
 
