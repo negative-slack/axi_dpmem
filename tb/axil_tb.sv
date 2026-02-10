@@ -77,6 +77,7 @@ module axil_tb;
 
     // dummy directed test case # 1
     @(posedge clk);
+    @(posedge clk);
 
     tb_AW_VALID = 1;
     tb_AW_ADDR  = 32'h8;

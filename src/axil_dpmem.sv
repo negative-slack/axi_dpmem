@@ -96,7 +96,7 @@ module axil_dpmem
           ar_received <= 1;
           axi_slv.AR_READY <= 0;
         end
-      end else if (axi_slv.B_VALID && axi_slv.B_READY) begin
+      end else if (axi_slv.R_VALID && axi_slv.R_READY) begin
         ar_received <= 0;
         axi_slv.AR_READY <= 1;
       end
